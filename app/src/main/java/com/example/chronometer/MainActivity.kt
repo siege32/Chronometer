@@ -1,5 +1,10 @@
 package com.example.chronometer
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,6 +34,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ChronometerScreen() {
+    var elapsedTime by remember {
+        mutableLongStateOf(0L)
+    }
+
+    var isRunning by remember {
+        mutableStateOf(false)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -37,7 +49,7 @@ fun ChronometerScreen() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "00:00"
+            text = formatTime(elapsedTime)
         )
 
         Spacer(
@@ -70,4 +82,15 @@ fun ChronometerScreen() {
             Text("Reset")
         }
     }
+}
+
+fun formatTime(totalSeconds: Long): String {
+    val minutes = totalSeconds / 60
+    val seconds = totalSeconds % 60
+
+    return String.format(
+        "%02d:%02d",
+        minutes,
+        seconds
+    )
 }
