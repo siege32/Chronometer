@@ -80,7 +80,9 @@ fun ChronometerScreen() {
         )
 
         Button(
-            onClick = {}
+            onClick = {
+                isRunning = false
+            }
         ) {
             Text("Pause")
         }
@@ -90,7 +92,10 @@ fun ChronometerScreen() {
         )
 
         Button(
-            onClick = {}
+            onClick = {
+                isRunning = false
+                elapsedTime = 0L
+            }
         ) {
             Text("Reset")
         }
